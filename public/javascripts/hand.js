@@ -1,4 +1,4 @@
-function Hand (cards) {
+function Hand(cards) {
   this.valid = function() {
     if(5 != cards.length)
       return false;
@@ -9,12 +9,27 @@ function Hand (cards) {
     });
     return true;
   };
+
+  this.sortCards = function(){
+    return cards;
+  };
+
   this.value = function() {
-    var ranking = 0;
-    var number = 0;
+    var handRank = 0;
+    var cardRank = 0;
     var suite = 0;
 
-    return [ranking, number, suite];
+    return (10000 * handRank) + (100 * cardRank) + suite;
+  };
+
+  this.compare = function(otherHand){
+    if (this.value() > otherHand.value()) {
+      return this;
+    } else if (otherHand.value() > this.value()) {
+      return otherHand;
+    } else {
+      return null;
+    }
   };
 }
 
